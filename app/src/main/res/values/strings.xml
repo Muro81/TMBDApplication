@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">TMBD App</string>
+    <string name="placeholder">Search</string>
 </resources>
