@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace 'com.example.tmbdapp'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.example.tmbdapp"
