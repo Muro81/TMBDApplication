@@ -16,7 +16,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tmbdapp.ui.theme.LightGray
-import com.example.tmbdapp.ui.theme.TMBDAppTheme
+import com.example.tmbdapp.ui.theme.TMDBAppTheme
 
 @Composable
 fun Dashboard(
@@ -57,7 +57,7 @@ enum class Tabs{
 @Preview(showBackground = false)
 @Composable
 fun DashboardPreview() {
-    TMBDAppTheme{
+    TMDBAppTheme{
         Dashboard(selectedTabIndex = 1, onClickedTab ={} )
     }
     
