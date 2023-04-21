@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tmbdapp.ui.theme.Gray
 import com.example.tmbdapp.ui.theme.LightGray
-import com.example.tmbdapp.ui.theme.TMBDAppTheme
+import com.example.tmbdapp.ui.theme.TMDBAppTheme
 import com.example.tmbdapp.ui.theme.White
 import com.example.tmbdapp.R
 
@@ -67,7 +67,7 @@ fun SearchBar(
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview(){
-    TMBDAppTheme{
+    TMDBAppTheme{
         SearchBar(
             value = "",
             placeholder = stringResource(id = R.string.placeholder),

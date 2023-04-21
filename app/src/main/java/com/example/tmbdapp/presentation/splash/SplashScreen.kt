@@ -13,7 +13,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tmbdapp.R
 import com.example.tmbdapp.ui.theme.Black
-import com.example.tmbdapp.ui.theme.TMBDAppTheme
+import com.example.tmbdapp.ui.theme.TMDBAppTheme
 
 
 @Composable 
@@ -37,7 +37,7 @@ fun SplashScreen() {
 @Preview(showBackground = true)
 @Composable
 fun SplashScreenPreview() {
-    TMBDAppTheme{
+    TMDBAppTheme{
         SplashScreen()
     }
 }
