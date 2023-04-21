@@ -1,9 +1,10 @@
 package com.example.tmbdapp.presentation.home
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Tab
 import androidx.compose.material.TabRow
@@ -12,40 +13,67 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.example.tmbdapp.R
+import com.example.tmbdapp.core.utils.enumToName
+import com.example.tmbdapp.ui.theme.Gray2
 import com.example.tmbdapp.ui.theme.LightGray
 import com.example.tmbdapp.ui.theme.TMDBAppTheme
 
 @Composable
 fun Dashboard(
     selectedTabIndex : Int,
-    onClickedTab : (Tabs) -> Unit
+    onClickedTab : (Tabs) -> Unit,
+    movies : List<String> //TODO change to Movie after API
 ) {
-    TabRow(
-        selectedTabIndex = selectedTabIndex,
-        indicator = { tabPositions ->
-            Box(
-                modifier = Modifier
-                    .tabIndicatorOffset(tabPositions[selectedTabIndex])
-                    .height(4.dp)
-                    .padding(horizontal = 28.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(color = LightGray)
-            )
-        }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
     ) {
-        Tabs.values().forEachIndexed { index, tabs ->
-            Tab(
-                selected = index == selectedTabIndex,
-                onClick = {onClickedTab(tabs)},
-                text = {Text(text = tabs.name, maxLines = 1, fontSize = 14.sp)}
-            )
+        TabRow(
+            selectedTabIndex = selectedTabIndex,
+            indicator = { tabPositions ->
+                Box(
+                    modifier = Modifier
+                        .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                        .height(4.dp)
+                        .padding(horizontal = 28.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(color = LightGray)
+                )
+            }
+        ) {
+            Tabs.values().forEachIndexed { index, tabs ->
+                Tab(
+                    modifier = Modifier
+                        .background(Gray2),
+                    selected = index == selectedTabIndex,
+                    onClick = { onClickedTab(tabs) },
+                    text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 14.sp) }
+                )
+            }
+        }
+        LazyVerticalGrid(
+            columns = GridCells.Fixed(3),
+            verticalArrangement = Arrangement.spacedBy(18.dp)
+        ) {
+            items(movies) { item: String ->
+                AsyncImage(
+                    modifier = Modifier
+                        .height(146.dp)
+                        .width(100.dp)
+                        .clip(shape = RoundedCornerShape(16.dp)),//TODO clip shape not working
+                    model = stringResource(id = R.string.poster_template, item),
+                    contentDescription = null
+                )
+            }
         }
     }
 }
-
 enum class Tabs{
     NOW_PLAYING,
     UPCOMING,
@@ -58,7 +86,7 @@ enum class Tabs{
 @Composable
 fun DashboardPreview() {
     TMDBAppTheme{
-        Dashboard(selectedTabIndex = 1, onClickedTab ={} )
+        Dashboard(selectedTabIndex = 1, onClickedTab ={}, movies = listOf() )
     }
     
 }

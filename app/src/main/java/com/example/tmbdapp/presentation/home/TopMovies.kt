@@ -1,15 +1,16 @@
 package com.example.tmbdapp.presentation.home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
+import com.example.tmbdapp.R
 
 @Composable
 fun TopMovies(
@@ -22,7 +23,13 @@ fun TopMovies(
         horizontalArrangement = Arrangement.spacedBy(30.dp)
     ){
         items(topMovies){ item: String ->
-            Image(painter = rememberAsyncImagePainter(model = item), contentDescription =null)
+            AsyncImage(
+                modifier = Modifier
+                    .clip(shape = RoundedCornerShape(16.dp))
+                    .height(210.dp)
+                    .width(140.dp),
+                model = stringResource(id = R.string.poster_template,item),
+                contentDescription =null)
         }
     }
 }
