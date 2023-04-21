@@ -2,6 +2,7 @@ package com.example.tmbdapp.presentation.home
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.tmbdapp.core.utils.enumToName
+import com.example.tmbdapp.ui.theme.Gray2
 import com.example.tmbdapp.ui.theme.LightGray
 import com.example.tmbdapp.ui.theme.TMDBAppTheme
 
@@ -23,29 +26,31 @@ fun Dashboard(
     selectedTabIndex : Int,
     onClickedTab : (Tabs) -> Unit
 ) {
-    TabRow(
-        selectedTabIndex = selectedTabIndex,
-        indicator = { tabPositions ->
-            Box(
-                modifier = Modifier
-                    .tabIndicatorOffset(tabPositions[selectedTabIndex])
-                    .height(4.dp)
-                    .padding(horizontal = 28.dp)
-                    .clip(RoundedCornerShape(8.dp))
-                    .background(color = LightGray)
-            )
-        }
-    ) {
-        Tabs.values().forEachIndexed { index, tabs ->
-            Tab(
-                selected = index == selectedTabIndex,
-                onClick = {onClickedTab(tabs)},
-                text = {Text(text = tabs.name, maxLines = 1, fontSize = 14.sp)}
-            )
+    Column() {
+        TabRow(
+            selectedTabIndex = selectedTabIndex,
+            indicator = { tabPositions ->
+                Box(
+                    modifier = Modifier
+                        .tabIndicatorOffset(tabPositions[selectedTabIndex])
+                        .height(4.dp)
+                        .padding(horizontal = 28.dp)
+                        .clip(RoundedCornerShape(8.dp))
+                        .background(color = LightGray)
+                )
+            }
+        ) {
+            Tabs.values().forEachIndexed { index, tabs ->
+                Tab(modifier = Modifier
+                    .background(Gray2),
+                    selected = index == selectedTabIndex,
+                    onClick = { onClickedTab(tabs) },
+                    text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 14.sp) }
+                )
+            }
         }
     }
 }
-
 enum class Tabs{
     NOW_PLAYING,
     UPCOMING,

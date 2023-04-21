@@ -1,15 +1,14 @@
 package com.example.tmbdapp.core.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
@@ -31,8 +30,7 @@ fun SearchBar(
 ) {
     OutlinedTextField(
         modifier = Modifier
-            .width(327.dp)
-            .height(42.dp),
+            .fillMaxWidth(),
         value = value,
         singleLine = true,
         isError = isError,
@@ -43,11 +41,11 @@ fun SearchBar(
         keyboardActions = KeyboardActions(
             onSearch = { onSearchClick }
         ),
-        placeholder = {Text(text = placeholder, color = LightGray, fontSize = 10.sp)},
+        placeholder = {Text(modifier = Modifier.height(21.dp),text = placeholder, color = LightGray, fontSize = 14.sp)},
         trailingIcon = {
             IconButton(onClick = { onSearchClick() }) {
                 Icon(
-                    imageVector = Icons.Default.Search,
+                    painter = painterResource(id =  R.drawable.search_bar_ic),
                     contentDescription = null,
                     tint = LightGray
                 )

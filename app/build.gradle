@@ -13,7 +13,7 @@ android {
     defaultConfig {
         applicationId "com.example.tmbdapp"
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode 1
         versionName "1.0"
 
@@ -27,6 +27,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    flavorDimensions "apiUrl"
+    productFlavors{
+        apiProduction {
+            dimension "apiUrl"
+            buildConfigField("String", "BASE_URL", "\"https://developers.themoviedb.org/3/\"")
         }
     }
     compileOptions {
