@@ -64,7 +64,7 @@ fun HomeScreen(
                 .fillMaxWidth()
                 .weight(0.4f)
                 ) {
-            Dashboard(selectedTabIndex = 0, onClickedTab = {})
+            Dashboard(selectedTabIndex = 0, onClickedTab = {}, movies = topMovies)
             //TODO update with API
         }
 
