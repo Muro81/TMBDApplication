@@ -3,7 +3,7 @@ package com.example.tmbdapp.core.utils
 import okhttp3.Request
 
 fun Request.addTMDBKeys(): Request{
-    val builder = this.newBuilder()//TODO FINISH THIS
+    val builder = this.newBuilder()
     return builder.build()
 }
 

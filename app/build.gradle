@@ -33,7 +33,7 @@ android {
     productFlavors{
         apiProduction {
             dimension "apiUrl"
-            buildConfigField("String", "BASE_URL", "\"https://developers.themoviedb.org/3/\"")
+            buildConfigField("String", "BASE_URL", "\"https://api.themoviedb.org/3/\"")
         }
     }
     compileOptions {

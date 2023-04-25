@@ -2,7 +2,7 @@ package com.example.tmbdapp.di
 
 import com.example.tmbdapp.BuildConfig
 import com.example.tmbdapp.data.remote.TMDBApiInterceptor
-import com.example.tmbdapp.data.remote.services.MovieApi
+import com.example.tmbdapp.data.remote.services.MoviesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,12 +33,12 @@ object AppModule {
     @Singleton
     fun provideMovieApi(
         okHttpClient: OkHttpClient
-    ) : MovieApi {
+    ) : MoviesApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient)
             .build()
-            .create(MovieApi::class.java)
+            .create(MoviesApi::class.java)
     }
 }

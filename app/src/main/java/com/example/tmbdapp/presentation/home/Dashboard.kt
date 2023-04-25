@@ -19,7 +19,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tmbdapp.R
+import com.example.tmbdapp.core.utils.Constants
 import com.example.tmbdapp.core.utils.enumToName
+import com.example.tmbdapp.domain.model.Movie
 import com.example.tmbdapp.ui.theme.Gray2
 import com.example.tmbdapp.ui.theme.LightGray
 import com.example.tmbdapp.ui.theme.TMDBAppTheme
@@ -27,8 +29,8 @@ import com.example.tmbdapp.ui.theme.TMDBAppTheme
 @Composable
 fun Dashboard(
     selectedTabIndex : Int,
-    onClickedTab : (Tabs) -> Unit,
-    movies : List<String> //TODO change to Movie after API
+    onClickedTab : (Int,Constants.Tabs) -> Unit,
+    movies : List<Movie>
 ) {
     Column(
         modifier = Modifier
@@ -47,12 +49,12 @@ fun Dashboard(
                 )
             }
         ) {
-            Tabs.values().forEachIndexed { index, tabs ->
+            Constants.Tabs.values().forEachIndexed { index, tabs ->
                 Tab(
                     modifier = Modifier
                         .background(Gray2),
                     selected = index == selectedTabIndex,
-                    onClick = { onClickedTab(tabs) },
+                    onClick = { onClickedTab(index,tabs) },
                     text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 14.sp) }
                 )
             }
@@ -61,32 +63,26 @@ fun Dashboard(
             columns = GridCells.Fixed(3),
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {
-            items(movies) { item: String ->
+            items(movies) { item: Movie ->
                 AsyncImage(
                     modifier = Modifier
                         .height(146.dp)
                         .width(100.dp)
                         .clip(shape = RoundedCornerShape(16.dp)),//TODO clip shape not working
-                    model = stringResource(id = R.string.poster_template, item),
+                    model = stringResource(id = R.string.poster_template, item.poster),
                     contentDescription = null
                 )
+                println("Poser is: "+stringResource(id = R.string.poster_template, item.poster))
             }
         }
     }
 }
-enum class Tabs{
-    NOW_PLAYING,
-    UPCOMING,
-    TOP_RATED,
-    POPULAR
-}
-
 
 @Preview(showBackground = false)
 @Composable
 fun DashboardPreview() {
     TMDBAppTheme{
-        Dashboard(selectedTabIndex = 1, onClickedTab ={}, movies = listOf() )
+       // Dashboard(selectedTabIndex = 1, onClickedTab = { }, movies = listOf() )
     }
     
 }
