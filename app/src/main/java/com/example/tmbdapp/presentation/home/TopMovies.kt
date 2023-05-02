@@ -11,10 +11,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.example.tmbdapp.R
+import com.example.tmbdapp.domain.model.Movie
 
 @Composable
 fun TopMovies(
-    topMovies : List<String>
+    topMovies : List<Movie>
     // will be changed to Movie after API implementation
 ) {
     LazyRow(modifier = Modifier
@@ -22,13 +23,13 @@ fun TopMovies(
         .padding(12.dp),
         horizontalArrangement = Arrangement.spacedBy(30.dp)
     ){
-        items(topMovies){ item: String ->
+        items(topMovies){ item: Movie ->
             AsyncImage(
                 modifier = Modifier
                     .clip(shape = RoundedCornerShape(16.dp))
                     .height(210.dp)
                     .width(140.dp),
-                model = stringResource(id = R.string.poster_template,item),
+                model = stringResource(id = R.string.poster_template,item.poster),
                 contentDescription =null)
         }
     }

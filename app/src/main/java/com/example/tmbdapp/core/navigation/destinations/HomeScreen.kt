@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.tmbdapp.core.navigation.Routes.HOME_SCREEN
 import com.example.tmbdapp.core.navigation.Routes.ROOT
+import com.example.tmbdapp.core.navigation.Routes.SEARCH_SCREEN
 import com.example.tmbdapp.presentation.SharedViewModel
 import com.example.tmbdapp.presentation.home.HomeScreen
 
@@ -19,7 +20,8 @@ infix fun NavGraphBuilder.homeScreenComposable(
         }
         val sharedViewModel = hiltViewModel<SharedViewModel>(parentEntry)
         HomeScreen(
-            viewModel = sharedViewModel
+            viewModel = sharedViewModel,
+            toSearchScreen = { navController.navigate(route = SEARCH_SCREEN) }
         )
     }
 }
