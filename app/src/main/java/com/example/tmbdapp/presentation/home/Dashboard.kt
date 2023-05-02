@@ -55,7 +55,7 @@ fun Dashboard(
                         .background(Gray2),
                     selected = index == selectedTabIndex,
                     onClick = { onClickedTab(index,tabs) },
-                    text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 14.sp) }
+                    text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 9.sp) }
                 )
             }
         }
@@ -67,12 +67,10 @@ fun Dashboard(
                 AsyncImage(
                     modifier = Modifier
                         .height(146.dp)
-                        .width(100.dp)
-                        .clip(shape = RoundedCornerShape(16.dp)),//TODO clip shape not working
+                        .width(100.dp),
                     model = stringResource(id = R.string.poster_template, item.poster),
                     contentDescription = null
                 )
-                println("Poser is: "+stringResource(id = R.string.poster_template, item.poster))
             }
         }
     }

@@ -11,7 +11,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tmbdapp.R
 import com.example.tmbdapp.core.components.SearchBar
-import com.example.tmbdapp.core.utils.Constants.topMovies
 import com.example.tmbdapp.presentation.SharedEvent
 import com.example.tmbdapp.presentation.SharedViewModel
 import com.example.tmbdapp.ui.theme.Gray2
@@ -19,7 +18,8 @@ import com.example.tmbdapp.ui.theme.White
 
 @Composable
 fun HomeScreen(
-    viewModel: SharedViewModel
+    viewModel: SharedViewModel,
+    toSearchScreen : () ->Unit
 ) {
     val state = viewModel.state
     Column(
@@ -58,6 +58,7 @@ fun HomeScreen(
                 }
             ) {
                 viewModel.onEvent(SharedEvent.SearchMovies)
+                toSearchScreen()
             }
         }
         Row (
@@ -66,8 +67,7 @@ fun HomeScreen(
                 .weight(0.4f)
                 .padding(horizontal = 24.dp)
                 ){
-            TopMovies(topMovies = topMovies)
-            //TODO update with API
+            TopMovies(topMovies = state.popular)
         }
         Row (
             modifier = Modifier
