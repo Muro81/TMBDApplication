@@ -3,4 +3,5 @@
     <string name="placeholder">Search</string>
     <string name="watch">What do you want to watch?</string>
     <string name="poster_template">https://image.tmdb.org/t/p/original%1$s</string>
+    <string name="runtime_template">%d minutes</string>
 </resources>

@@ -42,3 +42,7 @@ fun Int.idToGenre() : String {
     if(this == 37) return "Western"
     return ""
 }
+
+fun String.toYear() : String{
+    return this.split('-')[0]
+}
