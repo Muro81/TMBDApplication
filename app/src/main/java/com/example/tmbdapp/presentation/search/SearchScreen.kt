@@ -1,11 +1,14 @@
-package com.example.tmbdapp.presentation.home
+package com.example.tmbdapp.presentation.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -17,70 +20,74 @@ import com.example.tmbdapp.ui.theme.Gray2
 import com.example.tmbdapp.ui.theme.White
 
 @Composable
-fun HomeScreen(
-    viewModel: SharedViewModel,
-    toSearchScreen : () ->Unit
+fun SearchScreen(
+    viewModel : SharedViewModel,
+    onArrowClicked : () -> Unit
 ) {
     val state = viewModel.state
     Column(
         modifier = Modifier
             .fillMaxSize()
             .background(Gray2)
-    ){
-        Row (
+    ) {
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 24.dp)
+                .padding(top = 18.dp, start = 20.dp, end = 20.dp)
                 .weight(0.1f),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-                ){
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            IconButton(
+                onClick = { onArrowClicked() },
+                content = {
+                    Icon(
+                    painter = painterResource(id =  R.drawable.back_arrow_ic),
+                    contentDescription = null,
+                    tint = White
+                    )
+                }
+            )
             Text(
-                text = stringResource(id = R.string.watch),
-                fontSize = 18.sp,
+                text = stringResource(id = R.string.search),
                 color = White,
+                fontSize = 16.sp
                 )
-
+            Icon(
+                painter = painterResource(id =  R.drawable.info_ic),
+                contentDescription = null,
+                tint = White
+            )
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(start = 29.dp, end = 15.dp)
                 .weight(0.1f)
-                .padding(horizontal = 24.dp)
         ) {
             SearchBar(
                 value = state.query,
                 placeholder = stringResource(id = R.string.search),
                 isError = state.isError,
-                onTextChanged = {
-                        query ->
+                onTextChanged = { query ->
                     viewModel.onEvent(SharedEvent.QueryChanged(query = query))
                 }
             ) {
                 viewModel.onEvent(SharedEvent.SearchMovies)
-                toSearchScreen()
             }
         }
-        Row (
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .weight(0.4f)
-                .padding(horizontal = 24.dp)
-                ){
-            TopMovies(topMovies = state.popular)
+                .weight(0.8f)
+        ) {
+            if(state.isError || state.searchList.isEmpty()){
+                SearchListErrorComponent()
+            }
+            else{
+            SearchListComponent(movies = state.searchList)
+            }
         }
-        Row (
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.4f)
-                ) {
-            Dashboard(
-                selectedTabIndex = state.tabPage,
-                onClickedTab = { index,tabs ->
-                    viewModel.onEvent(SharedEvent.TabClicked(index = index,tabs))
-                },
-                movies = state.tabMovies)
-        }
-
     }
+
 }

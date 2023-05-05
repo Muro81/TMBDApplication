@@ -60,6 +60,8 @@ fun Dashboard(
             }
         }
         LazyVerticalGrid(
+            modifier = Modifier
+                .padding(top = 20.dp),
             columns = GridCells.Fixed(3),
             verticalArrangement = Arrangement.spacedBy(18.dp)
         ) {

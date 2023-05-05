@@ -120,8 +120,12 @@ class SharedViewModel @Inject constructor(
     private fun searchMovies(query : String){
         viewModelScope.launch {
             movieRepo.getSearch(query = query).collectLatest { networkResponse ->
+                val moviesList = networkResponse.data
                 when(networkResponse){
-                    is NetworkResponse.Success ->{
+                    is NetworkResponse.Success -> {
+                        if (moviesList != null) {
+                            state = state.copy(searchList = moviesList)
+                        }
                     }
                     is NetworkResponse.Error -> {
                         state = state.copy( isError = true )

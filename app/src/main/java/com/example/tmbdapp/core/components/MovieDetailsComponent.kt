@@ -29,18 +29,17 @@ fun MovieDetailsComponent(
     Row(
         modifier = Modifier
             .fillMaxSize()
-            .padding(start = 29.dp)
             .background(Gray2)
     ) {
         Column(
             modifier = Modifier
-                .width(120.dp)
-                .height(90.dp)
-                .clip(RoundedCornerShape(16.dp))
+                .wrapContentSize()
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .fillMaxSize(),
+                    .clip(shape = RoundedCornerShape(30.dp))
+                    .height(130.dp)
+                    .width(95.dp),
                 model = stringResource(
                     id = R.string.poster_template,movie.poster),
                     contentDescription = null)
