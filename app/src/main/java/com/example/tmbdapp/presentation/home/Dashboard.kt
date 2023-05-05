@@ -14,6 +14,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -55,7 +56,7 @@ fun Dashboard(
                         .background(Gray2),
                     selected = index == selectedTabIndex,
                     onClick = { onClickedTab(index,tabs) },
-                    text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 9.sp) }
+                    text = { Text(text = tabs.name.enumToName(), maxLines = 1, fontSize = 9.sp, fontWeight = FontWeight.Bold) }
                 )
             }
         }

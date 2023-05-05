@@ -1,4 +1,4 @@
-package com.example.tmbdapp.presentation.search
+package com.example.tmbdapp.presentation.watch
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,16 +15,14 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tmbdapp.R
 import com.example.tmbdapp.core.components.MoviesListComponent
-import com.example.tmbdapp.core.components.SearchBar
-import com.example.tmbdapp.presentation.SharedEvent
 import com.example.tmbdapp.presentation.SharedViewModel
 import com.example.tmbdapp.ui.theme.Gray2
 import com.example.tmbdapp.ui.theme.White
 
 @Composable
-fun SearchScreen(
+fun WatchListScreen(
     viewModel : SharedViewModel,
-    onArrowClicked : () -> Unit
+    onArrowClicked : () -> Unit,
 ) {
     val state = viewModel.state
     Column(
@@ -37,56 +35,34 @@ fun SearchScreen(
                 .fillMaxWidth()
                 .padding(top = 18.dp, start = 20.dp, end = 20.dp)
                 .weight(0.1f),
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(94.dp)
         ) {
             IconButton(
                 onClick = { onArrowClicked() },
                 content = {
                     Icon(
-                    painter = painterResource(id =  R.drawable.back_arrow_ic),
-                    contentDescription = null,
-                    tint = White
+                        painter = painterResource(id = R.drawable.back_arrow_ic),
+                        contentDescription = null,
+                        tint = White
                     )
                 }
             )
             Text(
-                text = stringResource(id = R.string.search),
+                text = stringResource(id = R.string.watch_list),
                 color = White,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Bold
-                )
-            Icon(
-                painter = painterResource(id =  R.drawable.info_ic),
-                contentDescription = null,
-                tint = White
             )
+
         }
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 29.dp, end = 15.dp)
-                .weight(0.1f)
-        ) {
-            SearchBar(
-                value = state.query,
-                placeholder = stringResource(id = R.string.search),
-                isError = state.isError,
-                onTextChanged = { query ->
-                    viewModel.onEvent(SharedEvent.QueryChanged(query = query))
-                }
-            ) {
-                viewModel.onEvent(SharedEvent.SearchMovies)
-            }
-        }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .weight(0.8f)
-        ) {
-            if(state.isError || state.searchList.isEmpty()) SearchListErrorComponent()
-            else MoviesListComponent(movies = state.searchList)
+                .weight(0.9f)
+        ){
+            if(state.watchList.isEmpty()) WatchListEmptyComponent()
+            else MoviesListComponent(movies = state.watchList)
         }
     }
-
 }
