@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.tmbdapp.core.utils.Constants
 import com.example.tmbdapp.core.utils.NetworkResponse
+import com.example.tmbdapp.core.utils.PreferenceCache
 import com.example.tmbdapp.domain.model.Movie
 import com.example.tmbdapp.domain.repository.MovieRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +17,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SharedViewModel @Inject constructor(
-    private val movieRepo: MovieRepository
+    private val movieRepo: MovieRepository,
+    private val prefsCache: PreferenceCache
 ) : ViewModel() {
     var state by mutableStateOf(SharedState())
     fun onEvent(event: SharedEvent) {
@@ -40,6 +42,7 @@ class SharedViewModel @Inject constructor(
         getUpcoming()
         getPopular()
         getTopRated()
+        state = state.copy(watchList = prefsCache.watchList)
     }
 
    private fun getNowPlaying(){
@@ -165,7 +168,8 @@ data class SharedState(
     val tabPage : Int = 0,
     val query: String = String(),
     val searchList : List<Movie> = listOf(),
-    val shouldShowBottomNavBar : Boolean = true
+    val shouldShowBottomNavBar : Boolean = true,
+    val watchList : MutableList<Movie> = mutableListOf()
     )
 sealed class SharedEvent {
     data class QueryChanged(val query: String) : SharedEvent()
