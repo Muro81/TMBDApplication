@@ -39,7 +39,7 @@ fun SearchBar(
             imeAction = ImeAction.Search
         ),
         keyboardActions = KeyboardActions(
-            onSearch = { onSearchClick }
+            onSearch = { onSearchClick() }
         ),
         placeholder = {Text(modifier = Modifier.height(21.dp),text = placeholder, color = LightGray, fontSize = 14.sp)},
         trailingIcon = {
@@ -68,7 +68,7 @@ fun SearchBarPreview(){
     TMDBAppTheme{
         SearchBar(
             value = "",
-            placeholder = stringResource(id = R.string.placeholder),
+            placeholder = stringResource(id = R.string.search),
             isError = false,
             onTextChanged = {},
             onSearchClick = {}

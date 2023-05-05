@@ -9,6 +9,7 @@ data class MovieDto(
     val poster : String ? = null,
     @SerializedName("vote_average")
     val votes : Float ? = null,
+    @SerializedName("genre_ids")
     val genres : List<Int> ? = null,
     @SerializedName("release_date")
     val date : String ? = null,
