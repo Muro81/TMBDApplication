@@ -24,7 +24,8 @@ import com.example.tmbdapp.ui.theme.White
 @Composable
 fun SearchScreen(
     viewModel : SharedViewModel,
-    onArrowClicked : () -> Unit
+    onArrowClicked : () -> Unit,
+    getMovieDetails : () -> Unit
 ) {
     val state = viewModel.state
     Column(
@@ -85,7 +86,10 @@ fun SearchScreen(
                 .weight(0.8f)
         ) {
             if(state.isError || state.searchList.isEmpty()) SearchListErrorComponent()
-            else MoviesListComponent(movies = state.searchList)
+            else MoviesListComponent(movies = state.searchList){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                getMovieDetails()
+            }
         }
     }
 

@@ -28,6 +28,7 @@ fun SearchBar(
     onTextChanged : (text : String) -> Unit,
     onSearchClick : () -> Unit
 ) {
+    //TODO on keyboard search button clicked nothing happens
     OutlinedTextField(
         modifier = Modifier
             .fillMaxWidth(),

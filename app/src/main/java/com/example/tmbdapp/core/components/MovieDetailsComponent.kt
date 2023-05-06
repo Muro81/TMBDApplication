@@ -1,6 +1,7 @@
 package com.example.tmbdapp.core.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
@@ -8,6 +9,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -24,7 +26,8 @@ import com.example.tmbdapp.ui.theme.*
 
 @Composable
 fun MovieDetailsComponent(
-    movie : Movie
+    movie : Movie,
+    goToDetails : (movie : Movie) -> Unit
 ) {
     Row(
         modifier = Modifier
@@ -37,12 +40,16 @@ fun MovieDetailsComponent(
         ) {
             AsyncImage(
                 modifier = Modifier
-                    .clip(shape = RoundedCornerShape(30.dp))
+                    .clip(shape = RoundedCornerShape(16.dp))
                     .height(130.dp)
-                    .width(95.dp),
+                    .width(95.dp)
+                    .clickable {
+                        goToDetails(movie)
+                    },
                 model = stringResource(
                     id = R.string.poster_template,movie.poster),
-                    contentDescription = null)
+                    contentDescription = null,
+                contentScale = ContentScale.Crop)
         }
         Column(
             modifier = Modifier
@@ -143,9 +150,10 @@ fun MovieDetailsComponentPreview() {
                 date = "2023-22-09",
                 poster = stringResource(id = R.string.poster_template,"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg"),
                 genre = "Action",
-                id = 13
+                id = 13,
+                backdrop = stringResource(id = R.string.poster_template,"/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg")
             )
-        )
+        ){}
     }
 
 }

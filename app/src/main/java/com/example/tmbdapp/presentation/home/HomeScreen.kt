@@ -20,7 +20,8 @@ import com.example.tmbdapp.ui.theme.White
 @Composable
 fun HomeScreen(
     viewModel: SharedViewModel,
-    toSearchScreen : () ->Unit
+    toSearchScreen : () ->Unit,
+    getMovieDetails : () -> Unit
 ) {
     val state = viewModel.state
     Column(
@@ -69,7 +70,10 @@ fun HomeScreen(
                 .weight(0.4f)
                 .padding(horizontal = 24.dp)
                 ){
-            TopMovies(topMovies = state.popular)
+            TopMovies(topMovies = state.popular){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                getMovieDetails()
+            }
         }
         Row (
             modifier = Modifier
@@ -77,11 +81,14 @@ fun HomeScreen(
                 .weight(0.4f)
                 ) {
             Dashboard(
-                selectedTabIndex = state.tabPage,
-                onClickedTab = { index,tabs ->
-                    viewModel.onEvent(SharedEvent.TabClicked(index = index,tabs))
-                },
-                movies = state.tabMovies)
+                nowPlaying = state.nowPlaying,
+                popular = state.popular,
+                upcoming = state.upcoming,
+                topRated = state.topRated
+               ){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                getMovieDetails()
+            }
         }
 
     }

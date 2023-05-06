@@ -6,22 +6,20 @@ import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
 import com.example.tmbdapp.core.navigation.Routes
-import com.example.tmbdapp.core.navigation.Routes.SEARCH_SCREEN
 import com.example.tmbdapp.presentation.SharedViewModel
-import com.example.tmbdapp.presentation.search.SearchScreen
+import com.example.tmbdapp.presentation.details.DetailsScreen
 
-infix fun NavGraphBuilder.searchScreenComposable(
-    navController : NavController
-){
-    composable(route = SEARCH_SCREEN) { navBackStackEntry ->
+infix fun NavGraphBuilder.detailsScreenComposable(
+    navController: NavController
+) {
+    composable(route = Routes.DETAILS_SCREEN) { navBackStackEntry ->
         val parentEntry = remember(navBackStackEntry) {
             navController.getBackStackEntry(Routes.ROOT)
         }
         val sharedViewModel = hiltViewModel<SharedViewModel>(parentEntry)
-        SearchScreen(
+        DetailsScreen(
             viewModel = sharedViewModel,
-            onArrowClicked = {navController.popBackStack()},
-            getMovieDetails = {navController.navigate(route = Routes.DETAILS_SCREEN)}
+            onArrowClicked = { navController.popBackStack() }
         )
     }
 }

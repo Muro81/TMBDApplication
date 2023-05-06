@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.tmbdapp.R
 import com.example.tmbdapp.core.components.MoviesListComponent
+import com.example.tmbdapp.presentation.SharedEvent
 import com.example.tmbdapp.presentation.SharedViewModel
 import com.example.tmbdapp.ui.theme.Gray2
 import com.example.tmbdapp.ui.theme.White
@@ -23,6 +24,7 @@ import com.example.tmbdapp.ui.theme.White
 fun WatchListScreen(
     viewModel : SharedViewModel,
     onArrowClicked : () -> Unit,
+    getMovieDetails : () -> Unit
 ) {
     val state = viewModel.state
     Column(
@@ -62,7 +64,11 @@ fun WatchListScreen(
                 .weight(0.9f)
         ){
             if(state.watchList.isEmpty()) WatchListEmptyComponent()
-            else MoviesListComponent(movies = state.watchList)
+            else MoviesListComponent(movies = state.watchList){ movie ->
+                viewModel.onEvent(SharedEvent.MovieClicked(movie))
+                getMovieDetails()
+
+            }
         }
     }
 }

@@ -12,7 +12,8 @@ import com.example.tmbdapp.domain.model.Movie
 
 @Composable
 fun MoviesListComponent(
-    movies : List<Movie>
+    movies : List<Movie>,
+    goToDetails : (movie : Movie) -> Unit
 ) {
     LazyColumn(
         modifier = Modifier
@@ -20,8 +21,10 @@ fun MoviesListComponent(
             .padding(start = 29.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ){
-        items(movies){ movie ->
-            MovieDetailsComponent(movie = movie )
+        items(movies){ movieItem ->
+            MovieDetailsComponent(movie = movieItem ){ movie ->
+                goToDetails(movie)
+            }
         }
     }
 }
