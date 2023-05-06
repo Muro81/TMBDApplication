@@ -18,6 +18,8 @@ buildscript {
         hilt_version = '2.45'
         hilt_compiler_version = '1.0.0'
         coil_version = '2.0.0-rc01'
+        share_pref_version = '1.2.0'
+        gson_version = '2.8.6'
     }
     repositories {
         google()

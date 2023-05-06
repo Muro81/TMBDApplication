@@ -20,7 +20,6 @@ import javax.inject.Inject
 class SharedViewModel @Inject constructor(
     private val movieRepo: MovieRepository,
     private val prefsCache: PreferenceCache
-
 ) : ViewModel() {
     var state by mutableStateOf(SharedState())
     fun onEvent(event: SharedEvent) {
@@ -49,12 +48,16 @@ class SharedViewModel @Inject constructor(
     private fun checkBookmarks(movie: Movie) {
         prefsCache.watchList.forEachIndexed {  index ,bookmark->
             if(bookmark.id == movie.id){
-                prefsCache.watchList.removeAt(index)
+                val list = prefsCache.watchList
+                list.removeAt(index)
+                prefsCache.watchList = list
                 state = state.copy(isBookmarked = false ,watchList = prefsCache.watchList)
                 return
             }
         }
-        prefsCache.watchList.add(movie)
+        val list = prefsCache.watchList
+        list.add(movie)
+        prefsCache.watchList = list
         state = state.copy(isBookmarked = true, watchList = prefsCache.watchList)
     }
 

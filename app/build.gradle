@@ -94,5 +94,6 @@ dependencies {
     implementation "androidx.hilt:hilt-navigation-compose:$hilt_compiler_version"
 
     // Shared prefs
-    implementation 'androidx.preference:preference:1.2.0'
+    implementation "androidx.preference:preference:$share_pref_version"
+    implementation "com.google.code.gson:gson:$gson_version"
 }
