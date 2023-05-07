@@ -1,12 +1,5 @@
 package com.example.tmbdapp.core.utils
 
-import okhttp3.Request
-
-fun Request.addTMDBKeys(): Request{
-    val builder = this.newBuilder()
-    return builder.build()
-}
-
 fun String.enumToName() : String{
     var res : String = this[0].toString()
     for (i in  1 until this.length){
