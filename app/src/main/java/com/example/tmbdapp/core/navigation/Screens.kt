@@ -1,6 +1,7 @@
 package com.example.tmbdapp.core.navigation
 
 import com.example.tmbdapp.R
+import com.example.tmbdapp.core.navigation.Routes.DETAILS_SCREEN
 import com.example.tmbdapp.core.navigation.Routes.HOME_SCREEN
 import com.example.tmbdapp.core.navigation.Routes.SEARCH_SCREEN
 import com.example.tmbdapp.core.navigation.Routes.WATCH_LIST_SCREEN

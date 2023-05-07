@@ -1,9 +1,12 @@
 package com.example.tmbdapp.data.remote.services
 
 import com.example.tmbdapp.BuildConfig.API_KEY
+import com.example.tmbdapp.data.remote.dto.CreditsDto
 import com.example.tmbdapp.data.remote.dto.MoviesDto
+import com.example.tmbdapp.data.remote.dto.ReviewsDto
 import retrofit2.Response
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface MoviesApi {
@@ -32,4 +35,16 @@ interface MoviesApi {
         @Query("api_key") apiKey : String = API_KEY,
         @Query("query") query : String
     ) : Response<MoviesDto>
+
+    @GET("movie/{id}/reviews")
+    suspend fun getReviews(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String = API_KEY
+    ) : Response<ReviewsDto>
+
+    @GET("movie/{id}/credits")
+    suspend fun getCast(
+    @Path("id") id: Int,
+    @Query("api_key") apiKey: String = API_KEY
+    ) : Response<CreditsDto>
 }

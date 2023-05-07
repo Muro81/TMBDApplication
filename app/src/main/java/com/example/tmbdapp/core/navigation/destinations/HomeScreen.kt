@@ -5,6 +5,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
+import com.example.tmbdapp.core.navigation.Routes.DETAILS_SCREEN
 import com.example.tmbdapp.core.navigation.Routes.HOME_SCREEN
 import com.example.tmbdapp.core.navigation.Routes.ROOT
 import com.example.tmbdapp.core.navigation.Routes.SEARCH_SCREEN
@@ -21,7 +22,8 @@ infix fun NavGraphBuilder.homeScreenComposable(
         val sharedViewModel = hiltViewModel<SharedViewModel>(parentEntry)
         HomeScreen(
             viewModel = sharedViewModel,
-            toSearchScreen = { navController.navigate(route = SEARCH_SCREEN) }
+            toSearchScreen = { navController.navigate(route = SEARCH_SCREEN) },
+            getMovieDetails = {navController.navigate(route = DETAILS_SCREEN)}
         )
     }
 }

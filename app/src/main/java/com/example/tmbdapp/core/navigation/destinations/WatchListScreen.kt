@@ -19,7 +19,8 @@ infix fun NavGraphBuilder.watchListScreenComposable(
         val sharedViewModel = hiltViewModel<SharedViewModel>(parentEntry)
         WatchListScreen(
             viewModel = sharedViewModel,
-            onArrowClicked = {navController.popBackStack()}
+            onArrowClicked = {navController.popBackStack()},
+            getMovieDetails = {navController.navigate(route = Routes.DETAILS_SCREEN)}
         )
     }
 }
