@@ -1,7 +1,6 @@
 package com.example.tmbdapp.di
 
 import com.example.tmbdapp.BuildConfig
-import com.example.tmbdapp.data.remote.TMDBApiInterceptor
 import com.example.tmbdapp.data.remote.services.MoviesApi
 import dagger.Module
 import dagger.Provides
@@ -19,13 +18,12 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(tmdbApiInterceptor: TMDBApiInterceptor) : OkHttpClient{
+    fun provideOkHttpClient() : OkHttpClient{
         val loggerInterceptor = HttpLoggingInterceptor().apply {
             level = HttpLoggingInterceptor.Level.BODY
         }
         return OkHttpClient.Builder()
             .addInterceptor(loggerInterceptor)
-            .addInterceptor(tmdbApiInterceptor)
             .build()
     }
 
