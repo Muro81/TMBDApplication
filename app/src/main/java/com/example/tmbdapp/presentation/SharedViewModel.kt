@@ -33,11 +33,10 @@ class SharedViewModel @Inject constructor(
             }
 
             is SharedEvent.MovieClicked ->{
-                state = state.copy(detailMovie = event.movie,)
+                state = state.copy(detailMovie = event.movie)
                 getCast(id = event.movie.id)
                 getReviews(id = event.movie.id)
                 isBookmarked(id = event.movie.id)
-                //TODO bottom bar needs to be invisible
             }
             is SharedEvent.MovieBookmark ->{
                 checkBookmarks(event.movie)
@@ -212,7 +211,6 @@ class SharedViewModel @Inject constructor(
 }
 
 data class SharedState(
-    val shouldShowSearch: Boolean = false,
     val isError: Boolean = false,
     val nowPlaying : List<Movie> = listOf(),
     val upcoming : List<Movie> = listOf(),
@@ -220,7 +218,6 @@ data class SharedState(
     val topRated : List<Movie> = listOf(),
     val query: String = String(),
     val searchList : List<Movie> = listOf(),
-    val shouldShowBottomNavBar : Boolean = true,
     val watchList : MutableList<Movie> = mutableListOf(),
     val detailMovie : Movie? = null,
     val isBookmarked : Boolean = false,

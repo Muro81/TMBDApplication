@@ -5,8 +5,9 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,7 +28,7 @@ import com.example.tmbdapp.ui.theme.White
 @Composable
 fun MovieIllustrationsComponent(
     movie : Movie,
-    onReviewClicked : () -> Unit
+    onStarClicked : () -> Unit
 ) {
     Box(
         modifier = Modifier
@@ -35,7 +36,7 @@ fun MovieIllustrationsComponent(
     ){
         AsyncImage(
             modifier = Modifier
-                .fillMaxWidth()//gives some padding on sides still...
+                .fillMaxWidth()
                 .height(210.dp)
                 .clip(RoundedCornerShape(bottomEnd = 16.dp, bottomStart = 16.dp))
                 .align(alignment = Alignment.TopStart),
@@ -61,31 +62,41 @@ fun MovieIllustrationsComponent(
             overflow = TextOverflow.Ellipsis,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(start = 35.dp,bottom = 75.dp)
+                .padding(start = 35.dp, bottom = 75.dp)
         )
         Row(
             modifier = Modifier
                 .align(Alignment.CenterEnd)
-                .padding(top = 55.dp,end = 30.dp)
+                .padding(top = 55.dp, end = 30.dp)
                 .clip(CircleShape)
                 .background(Gray)
-                .width(45.dp)
+                .width(55.dp)
                 .height(26.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Center
         ) {
-            Icon(
-                painter = painterResource(id =  R.drawable.rates_ic),
-                contentDescription = null,
-                tint = Orange
+            IconButton(
+                onClick = {
+                          onStarClicked()
+                },
+            content = {
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.spacedBy(5.dp)
+                ) {
+                    Icon(
+                        painter = painterResource(id =  R.drawable.rates_ic),
+                        contentDescription = null,
+                        tint = Orange
+                    )
+                    Text(
+                        text = movie.votes.toString(),
+                        fontSize = 12.sp,
+                        color = Orange,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
             )
-            Text(
-                text = movie.votes.toString(),
-                fontSize = 12.sp,
-                color = Orange,
-                fontWeight = FontWeight.Bold
-            )
-
         }
     }
 }
