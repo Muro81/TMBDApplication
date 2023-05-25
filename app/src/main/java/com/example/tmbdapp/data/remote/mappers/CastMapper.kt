@@ -10,10 +10,10 @@ fun CreditsDto.toCast() : List<Cast>{
         result.add(
             Cast(
                 name = cast.name ?: "",
-                picturePath = cast.picturePath ?: ""
+                picturePath = cast.picturePath ?: "/xy44UvpbTgzs9kWmp4C3fEaCl5h.png"
+                //placeholder if picture is null
             )
         )
     }
-
     return result.toList()
 }

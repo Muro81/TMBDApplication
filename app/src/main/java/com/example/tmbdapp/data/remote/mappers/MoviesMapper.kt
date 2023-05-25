@@ -20,7 +20,7 @@ fun MoviesDto.toMovies() : List<Movie> {
                     title = movieDto.title ?: "",
                     runtime = movieDto.runtime ?: Random.nextInt(100, 180),// da ne bi za svaki radili poseban api poziv da
                     //dobijemo ovu informaciju, slucajno je generisemo
-                    votes = movieDto.votes ?: -1f,
+                    votes = movieDto.votes ?: (Random.nextFloat() * 10),// ne dodju uvijek rezultati
                     backdrop = movieDto.backdrop
                 )
             )
