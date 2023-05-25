@@ -39,3 +39,7 @@ fun Int.idToGenre() : String {
 fun String.toYear() : String{
     return this.split('-')[0]
 }
+
+fun Float.roundUpToString() : String{
+    return String.format("%.1f",this)
+}

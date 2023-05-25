@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.example.tmbdapp.R
+import com.example.tmbdapp.core.utils.roundUpToString
 import com.example.tmbdapp.core.utils.toYear
 import com.example.tmbdapp.domain.model.Movie
 import com.example.tmbdapp.ui.theme.*
@@ -82,7 +83,7 @@ fun MovieDetailsComponent(
                             tint = Orange
                         )
                         Text(
-                            text = movie.votes.toString(),
+                            text = movie.votes.roundUpToString(),
                             fontSize = 12.sp,
                             color = Orange,
                             fontWeight = FontWeight.Bold
